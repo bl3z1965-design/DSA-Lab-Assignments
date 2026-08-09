@@ -33,8 +33,9 @@ void DisplayArray(int arr[], int n){
         return;
     }
     for(int i = 0; i < n; i++){
-        cout << arr[i] << endl;
+        cout << arr[i] << " ";
     }
+    cout << endl;
 }
 
 void InsertArray(int arr[], int &n){
