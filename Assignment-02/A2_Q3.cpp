@@ -20,7 +20,7 @@ void LinearSearch(int Array[], int size){
 void BinarySearch(int Array[], int size){
     int min = 0, max = size - 2;
     while(min <= max){
-        int mid = (min +max)/2;
+        int mid = (min + max)/2;
         if(Array[mid] == mid + 1)
             min = mid + 1;
         else
@@ -30,7 +30,7 @@ void BinarySearch(int Array[], int size){
 }
 
 int main(){
-    int Array[100] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int Array[100] = {1, 2, 3, 4, 5, 6, 8, 9, 10};
     int choice;
     cout << "Choose '1' for Linear Search or '2' for Binary Search: ";
     cin >> choice;
