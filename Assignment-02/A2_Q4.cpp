@@ -45,11 +45,15 @@ void reverse(char str[]){
 }
 
 bool isVowel(char ch){
+
     return (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' || ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U');
+
 }
 
 void removeVowels(char str[]){
+
     int rid = 0, wid = 0;
+
     while(str[rid] != '\0'){
         if(!isVowel(str[rid])){
             str[wid] = str[rid];
@@ -58,15 +62,25 @@ void removeVowels(char str[]){
         rid++;
     }
     str[wid] = '\0';
+
 }
 
 void sortString(char str[]){
+
     int size = 0;
     while(str[size] != '\0'){
         size++;
-    }
+    }    
 
-    
+    for(int i = 0; i < size - 1; i++){
+        for(int j = 0; j < size - 1 - i; j++){
+            if(str[j] > str[j + 1]){
+                char temp = str[j];
+                str[j] = str[j + 1];
+                str[j + 1] = temp;
+            }
+        }
+    }
 }
 
 int main() {
@@ -92,6 +106,12 @@ int main() {
 
     removeVowels(str1);
     cout << "String without vowels: " << str1 << endl;
+
+    cout << "Enter a string to arrange in alphabetical order (either lower or UPPER): ";
+    cin.getline(str1, 100);
+
+    sortString(str1);
+    cout << "String in alphabetical order: " << str1 << endl;
 
     return 0;
 }
