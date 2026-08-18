@@ -60,6 +60,15 @@ void removeVowels(char str[]){
     str[wid] = '\0';
 }
 
+void sortString(char str[]){
+    int size = 0;
+    while(str[size] != '\0'){
+        size++;
+    }
+
+    
+}
+
 int main() {
     char str1[100], str2[50];
     
