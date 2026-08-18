@@ -10,6 +10,7 @@
 using namespace std;
 
 void concatenate(char str1[], int maximum, char str2[]) {
+
     int i = 0;
     while(str1[i] != '\0') {
         i++;
@@ -21,20 +22,67 @@ void concatenate(char str1[], int maximum, char str2[]) {
         i++;
         j++;
     }
+
     str2[j] = '\0';
+}
+
+void reverse(char str[]){
+
+    int size = 0;
+    while(str[size] != '\0') {
+        size++;
+    }
+
+    int temp, end = size - 1;
+
+    for(int i = 0; i < size/2; i++){
+        temp = str[i];
+        str[i] = str[end];
+        str[end] = temp;
+        end--;
+    }
+
+}
+
+bool isVowel(char ch){
+    return (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' || ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U');
+}
+
+void removeVowels(char str[]){
+    int rid = 0, wid = 0;
+    while(str[rid] != '\0'){
+        if(!isVowel(str[rid])){
+            str[wid] = str[rid];
+            wid++;
+        }
+        rid++;
+    }
+    str[wid] = '\0';
 }
 
 int main() {
     char str1[100], str2[50];
-
+    
     cout << "Enter the first string: ";
-    cin.getline(str1, 90);
+    cin.getline(str1, 100);
 
     cout << "Enter the second string: ";
-    cin.getline(str2, 40);
+    cin.getline(str2, 50);
 
     concatenate(str1, 100, str2);
-
     cout << "Concatenated: " << str1 << endl;
+    
+    cout << "Enter a string to reverse: ";
+    cin.getline(str1, 100);
+
+    reverse(str1);
+    cout << "Reversed: " << str1 << endl;
+
+    cout << "Enter a string to remove vowels: ";
+    cin.getline(str1, 100);
+
+    removeVowels(str1);
+    cout << "String without vowels: " << str1 << endl;
+
     return 0;
 }
