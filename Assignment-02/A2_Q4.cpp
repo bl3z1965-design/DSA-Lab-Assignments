@@ -83,6 +83,22 @@ void sortString(char str[]){
     }
 }
 
+char toLowerCase(char ch){
+    if(ch >= 'A' && ch <= 'Z'){
+        return ch + ('a' - 'A');
+    }
+    return ch;
+}
+
+
+void stringToLowerCase(char str[]){
+    int size = 0;
+    while(str[size] != '\0'){
+        str[size] = toLowerCase(str[size]);
+        size++;
+    }
+}
+
 int main() {
     char str1[100], str2[50];
     
@@ -112,6 +128,12 @@ int main() {
 
     sortString(str1);
     cout << "String in alphabetical order: " << str1 << endl;
+    
+    cout << "Enter a string to convert it to lowercase: ";
+    cin.getline(str1, 100);
+
+    stringToLowerCase(str1);
+    cout << "String in lowercase: " << str1 << endl;
 
     return 0;
 }
