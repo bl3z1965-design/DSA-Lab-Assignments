@@ -10,15 +10,9 @@
 #include <iostream>
 using namespace std;
 
-const int MAX_N = 10;                     // maximum matrix dimension supported
-
-/* ============================================================
-   (a) DIAGONAL MATRIX
-   Only n elements (the diagonal) are non-zero.
-   Space: n   (instead of n*n)
-   ============================================================ */
+const int MAX_N = 10;
 class DiagonalMatrix {
-    int arr[MAX_N];   // arr[i] = element at (i,i)
+    int arr[MAX_N];
     int n;
 public:
     DiagonalMatrix(int size) : n(size) {
@@ -43,12 +37,6 @@ public:
     }
 };
 
-/* ============================================================
-   (b) TRI-DIAGONAL MATRIX
-   Non-zero only when |i - j| <= 1.
-   Space: 3n - 2
-   Mapping: index = 2*i + j   (valid because j = i-1, i, i+1)
-   ============================================================ */
 class TriDiagonalMatrix {
     int arr[3 * MAX_N];
     int n;
@@ -79,12 +67,6 @@ public:
     }
 };
 
-/* ============================================================
-   (c) LOWER TRIANGULAR MATRIX
-   Non-zero only when i >= j.
-   Space: n(n+1)/2
-   Mapping (row-major packing): index = i*(i+1)/2 + j
-   ============================================================ */
 class LowerTriangularMatrix {
     int arr[MAX_N * (MAX_N + 1) / 2];
     int n;
@@ -114,12 +96,6 @@ public:
     }
 };
 
-/* ============================================================
-   (d) UPPER TRIANGULAR MATRIX
-   Non-zero only when i <= j.
-   Space: n(n+1)/2
-   Mapping: index = i*n - i*(i-1)/2 + (j - i)
-   ============================================================ */
 class UpperTriangularMatrix {
     int arr[MAX_N * (MAX_N + 1) / 2];
     int n;
@@ -149,12 +125,6 @@ public:
     }
 };
 
-/* ============================================================
-   (e) SYMMETRIC MATRIX
-   A(i,j) == A(j,i), so only the lower (or upper) triangle
-   needs to be stored.
-   Space: n(n+1)/2
-   ============================================================ */
 class SymmetricMatrix {
     int arr[MAX_N * (MAX_N + 1) / 2];
     int n;
@@ -164,7 +134,7 @@ public:
     }
 
     void set(int i, int j, int value) {
-        if (i < j) { int t = i; i = j; j = t; }   // store only lower triangle
+        if (i < j) { int t = i; i = j; j = t; }
         arr[i * (i + 1) / 2 + j] = value;
     }
 
@@ -182,9 +152,6 @@ public:
     }
 };
 
-/* ============================================================
-   DEMONSTRATION
-   ============================================================ */
 int main() {
     int n = 4;
 
@@ -219,7 +186,7 @@ int main() {
     SymmetricMatrix sm(n);
     for (int i = 0; i < n; i++)
         for (int j = 0; j <= i; j++)
-            sm.set(i, j, i + j);   // symmetric by construction
+            sm.set(i, j, i + j);
     sm.display();
 
     return 0;
