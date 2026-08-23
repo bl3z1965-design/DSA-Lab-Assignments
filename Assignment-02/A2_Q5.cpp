@@ -31,7 +31,7 @@ public:
     void display() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++)
-                cout << get(i, j) << " ";
+                cout << get(i, j) << "\t";
             cout << "\n";
         }
     }
@@ -61,7 +61,7 @@ public:
     void display() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++)
-                cout << get(i, j) << " ";
+                cout << get(i, j) << "\t";
             cout << "\n";
         }
     }
@@ -90,7 +90,7 @@ public:
     void display() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++)
-                cout << get(i, j) << " ";
+                cout << get(i, j) << "\t";
             cout << "\n";
         }
     }
@@ -119,7 +119,7 @@ public:
     void display() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++)
-                cout << get(i, j) << " ";
+                cout << get(i, j) << "\t";
             cout << "\n";
         }
     }
@@ -146,7 +146,7 @@ public:
     void display() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++)
-                cout << get(i, j) << " ";
+                cout << get(i, j) << "\t";
             cout << "\n";
         }
     }
@@ -157,7 +157,7 @@ int main() {
 
     cout << "===== (a) Diagonal Matrix =====\n";
     DiagonalMatrix dm(n);
-    for (int i = 0; i < n; i++) dm.set(i, i, (i + 1) * 10);
+    for (int i = 0; i < n; i++) dm.set(i, i, 1);
     dm.display();
 
     cout << "\n===== (b) Tri-diagonal Matrix =====\n";
@@ -165,21 +165,21 @@ int main() {
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++)
             if (abs(i - j) <= 1)
-                tdm.set(i, j, i * 10 + j);
+                tdm.set(i, j, 1);
     tdm.display();
 
     cout << "\n===== (c) Lower Triangular Matrix =====\n";
     LowerTriangularMatrix ltm(n);
     for (int i = 0; i < n; i++)
         for (int j = 0; j <= i; j++)
-            ltm.set(i, j, i * 10 + j);
+            ltm.set(i, j, 1);
     ltm.display();
 
     cout << "\n===== (d) Upper Triangular Matrix =====\n";
     UpperTriangularMatrix utm(n);
     for (int i = 0; i < n; i++)
         for (int j = i; j < n; j++)
-            utm.set(i, j, i * 10 + j);
+            utm.set(i, j, 1);
     utm.display();
 
     cout << "\n===== (e) Symmetric Matrix =====\n";
