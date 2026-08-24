@@ -16,11 +16,13 @@ class DiagonalMatrix {
     int n;
 public:
     DiagonalMatrix(int size) : n(size) {
-        for (int i = 0; i < n; i++) arr[i] = 0;
+        for (int i = 0; i < n; i++) 
+            arr[i] = 0;
     }
 
     void set(int i, int j, int value) {
-        if (i == j) arr[i] = value;
+        if (i == j) 
+            arr[i] = value;
         else cout << "Invalid: off-diagonal elements are always 0\n";
     }
 
@@ -42,7 +44,8 @@ class TriDiagonalMatrix {
     int n;
 public:
     TriDiagonalMatrix(int size) : n(size) {
-        for (int i = 0; i < 3 * n; i++) arr[i] = 0;
+        for (int i = 0; i < 3 * n; i++) 
+            arr[i] = 0;
     }
 
     void set(int i, int j, int value) {
@@ -72,7 +75,8 @@ class LowerTriangularMatrix {
     int n;
 public:
     LowerTriangularMatrix(int size) : n(size) {
-        for (int i = 0; i < n * (n + 1) / 2; i++) arr[i] = 0;
+        for (int i = 0; i < n * (n + 1) / 2; i++) 
+            arr[i] = 0;
     }
 
     void set(int i, int j, int value) {
@@ -83,7 +87,8 @@ public:
     }
 
     int get(int i, int j) {
-        if (i >= j) return arr[i * (i + 1) / 2 + j];
+        if (i >= j) 
+            return arr[i * (i + 1) / 2 + j];
         return 0;
     }
 
@@ -101,7 +106,8 @@ class UpperTriangularMatrix {
     int n;
 public:
     UpperTriangularMatrix(int size) : n(size) {
-        for (int i = 0; i < n * (n + 1) / 2; i++) arr[i] = 0;
+        for (int i = 0; i < n * (n + 1) / 2; i++) 
+            arr[i] = 0;
     }
 
     void set(int i, int j, int value) {
@@ -112,7 +118,8 @@ public:
     }
 
     int get(int i, int j) {
-        if (i <= j) return arr[i * n - (i * (i - 1)) / 2 + (j - i)];
+        if (i <= j) 
+            return arr[i * n - (i * (i - 1)) / 2 + (j - i)];
         return 0;
     }
 
@@ -130,16 +137,21 @@ class SymmetricMatrix {
     int n;
 public:
     SymmetricMatrix(int size) : n(size) {
-        for (int i = 0; i < n * (n + 1) / 2; i++) arr[i] = 0;
+        for (int i = 0; i < n * (n + 1) / 2; i++) 
+            arr[i] = 0;
     }
 
     void set(int i, int j, int value) {
-        if (i < j) { int t = i; i = j; j = t; }
+        if (i < j) { 
+            int t = i; i = j; j = t; 
+        }
         arr[i * (i + 1) / 2 + j] = value;
     }
 
     int get(int i, int j) {
-        if (i < j) { int t = i; i = j; j = t; }
+        if (i < j) { 
+            int t = i; i = j; j = t; 
+        }
         return arr[i * (i + 1) / 2 + j];
     }
 
@@ -153,7 +165,7 @@ public:
 };
 
 int main() {
-    int n = 4;
+    int n = 5;
 
     cout << "===== (a) Diagonal Matrix =====\n";
     DiagonalMatrix dm(n);
