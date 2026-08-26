@@ -36,15 +36,7 @@ public:
         data[0][2] = terms;
     }
 
-    int getValue(int row, int col)  {
-        for (int i = 1; i <= terms; i++) {
-            if (data[i][0] == row && data[i][1] == col)
-                return data[i][2];
-        }
-        return 0;
-    }
-
-    void display()  {
+    void display() {
         if (terms == 0) {
             cout << "(Matrix has no non-zero terms)\n";
             return;
@@ -54,17 +46,24 @@ public:
             cout << data[i][0] << "\t" << data[i][1] << "\t" << data[i][2] << "\n";
     }
 
-    void displayAsGrid()  {
+    void displayAsGrid() {
         int rows = data[0][0], cols = data[0][1];
+        int k = 1;
         for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++)
-                cout << getValue(i, j) << "\t";
+            for (int j = 0; j < cols; j++) {
+                if (k <= terms && data[k][0] == i && data[k][1] == j) {
+                    cout << data[k][2] << "\t";
+                    k++;
+                } else {
+                    cout << "0\t";
+                }
+            }
             cout << "\n";
         }
     }
 };
 
-void transpose( SparseMatrix &a, SparseMatrix &result) {
+void transpose(SparseMatrix &a, SparseMatrix &result) {
     int rows = a.data[0][0];
     int cols = a.data[0][1];
     int t = a.data[0][2];
@@ -93,26 +92,56 @@ bool add(SparseMatrix &a, SparseMatrix &b, SparseMatrix &result) {
         return false;
     }
 
-    int rows = a.data[0][0];
-    int cols = a.data[0][1];
+    int pA = 1, pB = 1;
     result.terms = 0;
 
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            int valA = a.getValue(i, j);
-            int valB = b.getValue(i, j);
-            int sum = valA + valB;
+    while (pA <= a.terms && pB <= b.terms) {
+        int rA = a.data[pA][0], cA = a.data[pA][1];
+        int rB = b.data[pB][0], cB = b.data[pB][1];
+
+        if (rA < rB || (rA == rB && cA < cB)) {
+            result.terms++;
+            result.data[result.terms][0] = rA;
+            result.data[result.terms][1] = cA;
+            result.data[result.terms][2] = a.data[pA][2];
+            pA++;
+        } else if (rB < rA || (rA == rB && cB < cA)) {
+            result.terms++;
+            result.data[result.terms][0] = rB;
+            result.data[result.terms][1] = cB;
+            result.data[result.terms][2] = b.data[pB][2];
+            pB++;
+        } else {
+            int sum = a.data[pA][2] + b.data[pB][2];
             if (sum != 0) {
                 result.terms++;
-                result.data[result.terms][0] = i;
-                result.data[result.terms][1] = j;
+                result.data[result.terms][0] = rA;
+                result.data[result.terms][1] = cA;
                 result.data[result.terms][2] = sum;
             }
+            pA++;
+            pB++;
         }
     }
 
-    result.data[0][0] = rows;
-    result.data[0][1] = cols;
+    while (pA <= a.terms) {
+        result.terms++;
+        result.data[result.terms][0] = a.data[pA][0];
+        result.data[result.terms][1] = a.data[pA][1];
+        result.data[result.terms][2] = a.data[pA][2];
+        pA++;
+    }
+
+    while (pB <= b.terms) {
+        result.terms++;
+        result.data[result.terms][0] = b.data[pB][0];
+        result.data[result.terms][1] = b.data[pB][1];
+        result.data[result.terms][2] = b.data[pB][2];
+        pB++;
+    }
+
+    result.data[0][0] = a.data[0][0];
+    result.data[0][1] = a.data[0][1];
     result.data[0][2] = result.terms;
     return true;
 }
@@ -126,14 +155,44 @@ bool multiply(SparseMatrix &a, SparseMatrix &b, SparseMatrix &result) {
         return false;
     }
 
+    SparseMatrix bT;
+    transpose(b, bT);
+
     result.terms = 0;
+    int aRowStart = 1;
 
     for (int i = 0; i < aRows; i++) {
+        while (aRowStart <= a.terms && a.data[aRowStart][0] < i) {
+            aRowStart++;
+        }
+
+        int bRowStart = 1;
         for (int j = 0; j < bCols; j++) {
-            int sum = 0;
-            for (int k = 0; k < aCols; k++) {
-                sum += a.getValue(i, k) * b.getValue(k, j);
+            while (bRowStart <= bT.terms && bT.data[bRowStart][0] < j) {
+                bRowStart++;
             }
+
+            int pA = aRowStart;
+            int pB = bRowStart;
+            int sum = 0;
+
+            while (pA <= a.terms && a.data[pA][0] == i &&
+                   pB <= bT.terms && bT.data[pB][0] == j) {
+
+                int colA = a.data[pA][1];
+                int colB = bT.data[pB][1];
+
+                if (colA == colB) {
+                    sum += a.data[pA][2] * bT.data[pB][2];
+                    pA++;
+                    pB++;
+                } else if (colA < colB) {
+                    pA++;
+                } else {
+                    pB++;
+                }
+            }
+
             if (sum != 0) {
                 result.terms++;
                 result.data[result.terms][0] = i;
