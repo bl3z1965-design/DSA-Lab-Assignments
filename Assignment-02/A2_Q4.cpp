@@ -6,7 +6,6 @@
 // (e) Write a program to convert a character from uppercase to lowercase.
 
 #include <iostream>
-// #include <string>
 using namespace std;
 
 void concatenate(char str1[], int maximum, char str2[]) {
