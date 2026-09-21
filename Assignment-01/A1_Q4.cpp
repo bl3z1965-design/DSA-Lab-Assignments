@@ -66,7 +66,7 @@ void multiplication(){
     for(int i = 0; i < 3; i++){
         for (int j = 0; j < 5; j++){
             for(int k = 0; k < 6; k++){
-                product[i][j] += arr1[i][k] * arr2[k][i];
+                product[i][j] += arr1[i][k] * arr2[k][j];
             }
         }
     }

@@ -17,7 +17,7 @@ void concatenate(char str1[], int maximum, char str2[]) {
     }
 
     int j = 0;
-    while(str2[j] != 0 && i < maximum -1) {
+    while(str2[j] != '\0' && i < maximum -1) {
         str1[i] = str2[j];
         i++;
         j++;

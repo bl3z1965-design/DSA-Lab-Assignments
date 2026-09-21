@@ -7,7 +7,7 @@ using namespace std;
 
 int main(){
 
-    int Array[SIZE], n, count = 0;
+    int Array[SIZE], n, count = 1;
 
     cout << "Enter the size of array:";
     cin >> n;
@@ -18,7 +18,7 @@ int main(){
     }
 
     for(int i = 0; i < n - 1; i++){
-        for( int j = 0; j < n - i -1; j++){
+        for( int j = 0; j < n - i - 1; j++){
             if (Array[j] > Array[j + 1]){
                 int temp = Array[j + 1];
                 Array[j + 1] = Array[j];
